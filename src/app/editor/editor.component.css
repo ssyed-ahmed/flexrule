@@ -1,6 +1,6 @@
 .left-menu {
     border-right: 1px solid #ccc;
-    min-height: 100vh;
+    min-height: 90vh;
 }
 .left-menu-heading {
     text-align: center;
@@ -20,4 +20,10 @@ button {
 .shapes-container {
     padding-top: 20px;
     padding-left: 12px;
+}
+
+#editor-container {
+    margin-top: 15px;
+    height: 80vh;
+    border: 1px solid red;
 }

@@ -12,4 +12,10 @@ export class ProcessComponent implements OnInit {
   ngOnInit() {
   }
 
+  dragStart(evt) {
+    // alert('drag started')
+    console.log(evt.target.id)
+    evt.dataTransfer.setData("text/html", evt.target.id);
+  }
+
 }
