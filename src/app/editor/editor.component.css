@@ -7,3 +7,17 @@
     padding-top: 10px;
     font-size: 18px;
 }
+.export-button {
+    float: right;
+}
+
+button {
+    border-radius: 3px;
+    font-size: 16px;
+    padding: 3px 30px;
+}
+
+.shapes-container {
+    padding-top: 20px;
+    padding-left: 12px;
+}
