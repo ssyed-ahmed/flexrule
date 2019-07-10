@@ -1,0 +1,9 @@
+.left-menu {
+    border-right: 1px solid #ccc;
+    min-height: 100vh;
+}
+.left-menu-heading {
+    text-align: center;
+    padding-top: 10px;
+    font-size: 18px;
+}
