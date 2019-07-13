@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-2 left-menu">
-            <div class="left-menu-heading">
+            <div class="left-menu-heading" (click)="stopEdit()">
                 Shapes
             </div>
             <div class="shapes-container">
@@ -17,9 +17,11 @@
             </div>
             <div id="editor-container" (dragover)="allowDrop($event)" (drop)="onDrop($event)">
                 <!-- <canvas id="editor-canvas" width="100%" height="100%">
-
-                </canvas> -->
+                </canvas>                 -->
             </div>
+            <!-- <div style="height:500px;width:500;background-color:green;">
+                <div id="dxy" style="width:100px; background-color:red">test</div>
+            </div> -->
         </div>
     </div>
 </div>
