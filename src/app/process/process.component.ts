@@ -13,7 +13,7 @@ export class ProcessComponent implements OnInit {
 
   process:any = {
     shape: 'rectangle',
-    name: 'process',
+    name: 'Process',
     positionX: '0',
     positionY: '0'
   }

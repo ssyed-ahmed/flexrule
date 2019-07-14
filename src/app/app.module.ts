@@ -7,6 +7,7 @@ import { HeaderComponent } from './header/header.component';
 import { EditorComponent } from './editor/editor.component';
 import { ProcessComponent } from './process/process.component';
 import { DocumentComponent } from './document/document.component';
+import { FlowComponent } from './flow/flow.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { DocumentComponent } from './document/document.component';
     HeaderComponent,
     EditorComponent,
     ProcessComponent,
-    DocumentComponent
+    DocumentComponent,
+    FlowComponent
   ],
   imports: [
     BrowserModule,

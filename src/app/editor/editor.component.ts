@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone, HostListener, OnDestroy, Renderer2, ElementRef, AfterViewInit  } from '@angular/core';
+import { Component, OnInit, NgZone, HostListener, OnDestroy, Renderer2, ElementRef  } from '@angular/core';
 import { Subscription, fromEvent, Subject } from 'rxjs';
 
 import { SharedService } from '../shared/shared.service';
@@ -8,11 +8,12 @@ import { SharedService } from '../shared/shared.service';
   templateUrl: './editor.component.html',
   styleUrls: ['./editor.component.css']
 })
-export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
+export class EditorComponent implements OnInit, OnDestroy {
 
   canvas: any
 
   elementsList: Array<any> = []
+  elementsDataList: Array<any> = []
 
   elementAdded: boolean = false
 
@@ -29,6 +30,8 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
   listenerUpFn: () => void
   listenerDownFn: () => void
   listenerMoveFn: () => void
+
+  exportedJSON: any = []
 
   constructor(
     private zone: NgZone, 
@@ -50,38 +53,32 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
     
   }
 
-  ngAfterViewInit() {
-    let el = this.elementRef.nativeElement.querySelector('#dxy')
-    this.listenerDownFn = this.renderer.listen(el, 'mousedown', this.mouseDown.bind(this))
-    this.listenerUpFn = this.renderer.listen(this.elementRef.nativeElement, 'mouseup', this.mouseUp.bind(this))
-  }
-
-  dragEnd(e) {
-    console.log('drag ended');
-    
-  }
-
   mouseUp(e)
   {
     console.log('mouse up detected');
-    
-    this.listenerMoveFn()
+    if (this.listenerMoveFn) {
+      this.listenerMoveFn()
+    }
   }
   
   mouseDown(e){
     let self = this
     console.log('mouse down detected');
+    console.log(e);
+    this.elemId = e.path[1].id
     e.preventDefault()
     this.listenerMoveFn = this.renderer.listen(this.elementRef.nativeElement, 'mousemove', this.divMove.bind(this))
   }
   
   divMove(e){
-    console.log('mouse move detected');
-    
-    let div = document.getElementById(this.elemId);
-    div.style.position = 'absolute';
-    div.style.top = e.clientY + 'px';
-    div.style.left = e.clientX + 'px';
+    try {
+      let div = document.getElementById(this.elemId);
+      div.style.position = 'absolute';
+      div.style.top = e.clientY + 'px';
+      div.style.left = e.clientX + 'px';
+    } catch (e)  {
+
+    }
   }
 
   ngOnDestroy() {
@@ -103,34 +100,6 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
     this.sharedService.sendClickEvent('clicked')
   }
 
-  // onDrop(evt) {
-  //   evt.preventDefault()
-  //   let dataStr = evt.dataTransfer.getData('text/plain')
-  //   let data = JSON.parse(dataStr)
-  //   let nodeCopy: any = null
-  //   if (data.isDirty) {
-  //     let child = document.getElementById(data.id)
-  //     evt.target.parentNode.appendChild(child)
-  //   } else {
-  //     nodeCopy = document.getElementById(data.id).cloneNode(true)
-  //     nodeCopy.id = this.getUniqueId()
-  //     evt.target.appendChild(nodeCopy)
-  //     this.elementsList.push(nodeCopy)
-  //     setTimeout(() => {
-  //       nodeCopy.addEventListener('dragstart', (evt) => {
-  //         let newData = data.process
-  //         newData.id = nodeCopy.id
-  //         let payload: any = {}
-  //         payload.id = evt.target.id
-  //         payload.process = newData
-  //         payload.isDirty = true
-  //         evt.dataTransfer.setData("text/plain", JSON.stringify(payload))
-  //       })
-  //     }, 100)
-  //   }
-  //   console.log(this.elementsList)
-  // }
-
   onDrop(evt) {
     let self = this
     evt.preventDefault()
@@ -147,6 +116,7 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
     
     evt.target.appendChild(nodeCopy)
     this.elementsList.push(nodeCopy)
+    this.elementsDataList.push(JSON.parse(JSON.stringify(data)))
     setTimeout(() => {
       let el = this.elementRef.nativeElement.querySelector('#' + this.elemId)
       this.listenerDownFn = this.renderer.listen(el, 'mousedown', this.mouseDown.bind(this))
@@ -157,5 +127,17 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
 
   getUniqueId() {
     return 'id-' + Math.random().toString(36).substr(2, 16)
+  }
+
+  exportJSON() {
+    if (this.elementsList.length === 0) {
+      return
+    }
+
+    this.elementsDataList.forEach(elem => {
+      delete elem.id      
+      this.exportedJSON.push(elem.process)
+      console.log(JSON.stringify(this.exportedJSON))
+    })
   }
 }
