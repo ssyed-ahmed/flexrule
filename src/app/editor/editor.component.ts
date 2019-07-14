@@ -33,6 +33,8 @@ export class EditorComponent implements OnInit, OnDestroy {
   listenerDownFn: () => void
   listenerMoveFn: () => void
 
+  movedObject: any = {}
+
   exportedJSON: any = []
 
   constructor(
@@ -72,9 +74,19 @@ export class EditorComponent implements OnInit, OnDestroy {
   divMove(e){
     try {
       let div = document.getElementById(this.elemId);
+      this.movedObject.id = this.elemId
       div.style.position = 'absolute';
       div.style.top = e.clientY + 'px';
       div.style.left = e.clientX + 'px';
+      this.movedObject.posX = e.clientX
+      this.movedObject.posY = e.clientY
+
+      this.elementsDataList.map(elem => {
+        if (elem.id === this.elemId) {
+          elem.process.positionX = this.movedObject.posX
+          elem.process.positionY = this.movedObject.posY
+        }
+      })
     } catch (e)  {
 
     }
@@ -110,8 +122,8 @@ export class EditorComponent implements OnInit, OnDestroy {
     
     let nodeCopy: any = document.getElementById(data.id).cloneNode(true)
     nodeCopy.id = this.getUniqueId()
+    data.id = nodeCopy.id
     this.elemId = nodeCopy.id
-    console.log('DIV Id = ' + nodeCopy.id);
     
     evt.target.appendChild(nodeCopy)
     this.elementsList.push(nodeCopy)

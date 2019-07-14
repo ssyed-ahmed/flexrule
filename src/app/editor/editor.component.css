@@ -25,5 +25,5 @@ button {
 #editor-container {
     margin-top: 15px;
     height: 80vh;
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
