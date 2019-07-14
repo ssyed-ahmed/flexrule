@@ -3,6 +3,8 @@ import { Subscription, fromEvent, Subject } from 'rxjs';
 
 import { SharedService } from '../shared/shared.service';
 
+import { saveAs } from 'file-saver/dist/FileSaver';
+
 @Component({
   selector: 'app-editor',
   templateUrl: './editor.component.html',
@@ -55,7 +57,6 @@ export class EditorComponent implements OnInit, OnDestroy {
 
   mouseUp(e)
   {
-    console.log('mouse up detected');
     if (this.listenerMoveFn) {
       this.listenerMoveFn()
     }
@@ -63,8 +64,6 @@ export class EditorComponent implements OnInit, OnDestroy {
   
   mouseDown(e){
     let self = this
-    console.log('mouse down detected');
-    console.log(e);
     this.elemId = e.path[1].id
     e.preventDefault()
     this.listenerMoveFn = this.renderer.listen(this.elementRef.nativeElement, 'mousemove', this.divMove.bind(this))
@@ -122,7 +121,6 @@ export class EditorComponent implements OnInit, OnDestroy {
       this.listenerDownFn = this.renderer.listen(el, 'mousedown', this.mouseDown.bind(this))
       this.listenerUpFn = this.renderer.listen(this.elementRef.nativeElement, 'mouseup', this.mouseUp.bind(this))
     }, 100)
-    // console.log(this.elementsList)
   }
 
   getUniqueId() {
@@ -137,7 +135,13 @@ export class EditorComponent implements OnInit, OnDestroy {
     this.elementsDataList.forEach(elem => {
       delete elem.id      
       this.exportedJSON.push(elem.process)
-      console.log(JSON.stringify(this.exportedJSON))
     })
+
+    let data = JSON.stringify(this.exportedJSON)
+    console.log(data)    
+    let blob = new Blob([data], {type: 'text/plain'})
+    let url = window.URL.createObjectURL(blob)
+    saveAs(blob, 'exportJSON.json')
+    window.open(url)
   }
 }

@@ -12,7 +12,7 @@ export class FlowComponent implements OnInit {
   @Input() draggable?: boolean = true
 
   process:any = {
-    shape: 'document',
+    shape: 'flow',
     name: 'Flow',
     positionX: '0',
     positionY: '0'
