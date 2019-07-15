@@ -77,11 +77,4 @@ export class ProcessComponent implements OnInit, OnDestroy {
     this.stopEdit()
   }
 
-  onMouseDown(event) {
-    // event.preventDefault()
-    if (this.dropCompleted) {
-      this.sharedService.sendEvent({eventType: 'mousedown', event: event})
-    }
-  }
-
 }

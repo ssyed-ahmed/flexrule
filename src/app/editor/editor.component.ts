@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone, HostListener, OnDestroy, Renderer2, ElementRef, ChangeDetectorRef, AfterViewInit  } from '@angular/core';
+import { Component, OnInit, NgZone, HostListener, OnDestroy, Renderer2, ElementRef, ChangeDetectorRef  } from '@angular/core';
 import { Subscription, fromEvent, Subject } from 'rxjs';
 
 import { SharedService } from '../shared/shared.service';
@@ -10,7 +10,7 @@ import { saveAs } from 'file-saver/dist/FileSaver';
   templateUrl: './editor.component.html',
   styleUrls: ['./editor.component.css']
 })
-export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
+export class EditorComponent implements OnInit, OnDestroy {
 
   canvas: any
 
@@ -72,10 +72,6 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
     
     // document.getElementById('dxy').addEventListener('mousedown', this.mouseDown, false);
     
-  }
-
-  ngAfterViewInit() {
-    // this.cd.detectChanges()
   }
 
   mouseUp(e)
@@ -159,7 +155,6 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
       this.flowList.push(++this.flowCount)
     }
     nodeCopy.id = this.getUniqueId()
-    // nodeCopy.childNodes[0].contentEditable = 'true'
     data.id = nodeCopy.id
     this.elemId = nodeCopy.id
 

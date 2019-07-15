@@ -41,4 +41,12 @@ export class DocumentComponent implements OnInit {
     this.isEditable = true
   }
 
+  stopEdit() {
+    this.isEditable = false
+  }
+
+  onKeyDown(event) {
+    this.stopEdit()
+  }
+
 }
