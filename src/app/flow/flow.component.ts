@@ -21,7 +21,7 @@ export class FlowComponent implements OnInit {
   isEditable: boolean = false
   
   constructor(private sharedService: SharedService) { 
-    this.sharedService.getClickEvent().subscribe((message: string) => {
+    this.sharedService.getEvent().subscribe((message: string) => {
       console.log(message)
       this.isEditable = false
     })

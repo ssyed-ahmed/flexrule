@@ -1,5 +1,5 @@
 .process {
-    /* cursor: pointer; */
+    margin-bottom: 30px;
 }
 
 .label {
@@ -17,4 +17,8 @@
     padding-top: 30px;
     font-size: 15px;
     width: 70px;
+}
+
+input {
+    width: 100px;
 }

@@ -7,15 +7,24 @@ import { Observable, Subject } from 'rxjs';
 })
 export class SharedService {
 
-    private clickSubject: Subject<string> = new Subject<string>()
+    private subject: Subject<any> = new Subject<any>()
+    private dropSubject: Subject<any> = new Subject<any>()
 
     constructor() {}
 
-    sendClickEvent(message: string) {
-        this.clickSubject.next(message)
+    sendEvent(message: any) {
+        this.subject.next(message)
     }
 
-    getClickEvent(): Observable<any> {
-        return this.clickSubject.asObservable()
+    getEvent(): Observable<any> {
+        return this.subject.asObservable()
+    }
+
+    setDropCompleted(message: any) {
+        this.dropSubject.next(message)
+    }
+
+    getDropCompleted() {
+        return this.dropSubject.asObservable()
     }
 }

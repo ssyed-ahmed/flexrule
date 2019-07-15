@@ -1,6 +1,7 @@
-<div class="process" id="process" draggable="{{draggable}}" (dragstart)="dragStart($event)" (dblclick)="startEdit()">
+<div class="process" id="process" draggable="{{draggable}}" (dragstart)="dragStart($event)" 
+    (dblclick)="startEdit()">
         <div *ngIf="isEditable" class="input-text">
-            <input type="text" [(ngModel)]="process.name">
+            <input type="text" [(ngModel)]="process.name" (keydown.enter)="onKeyDown($event)">
         </div>
         <p class="label" *ngIf="!isEditable">{{process.name}}</p>
     <svg width="150" height="80">

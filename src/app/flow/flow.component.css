@@ -1,8 +1,11 @@
+.flow {
+    margin-bottom: 30px;
+}
 .label {
     color: white;
     position: absolute;
-    padding-left: 45px;
-    padding-top: 30px;
+    padding-left: 25px;
+    padding-top: 44px;
     font-size: 15px;
 }
 
@@ -10,7 +13,7 @@
     color: black;
     position: absolute;
     padding-left: 45px;
-    padding-top: 30px;
+    padding-top: 57px;
     font-size: 15px;
     width: 70px;
 }

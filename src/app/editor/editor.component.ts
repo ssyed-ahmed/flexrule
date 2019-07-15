@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone, HostListener, OnDestroy, Renderer2, ElementRef  } from '@angular/core';
+import { Component, OnInit, NgZone, HostListener, OnDestroy, Renderer2, ElementRef, ChangeDetectorRef, AfterViewInit  } from '@angular/core';
 import { Subscription, fromEvent, Subject } from 'rxjs';
 
 import { SharedService } from '../shared/shared.service';
@@ -10,7 +10,7 @@ import { saveAs } from 'file-saver/dist/FileSaver';
   templateUrl: './editor.component.html',
   styleUrls: ['./editor.component.css']
 })
-export class EditorComponent implements OnInit, OnDestroy {
+export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
 
   canvas: any
 
@@ -32,17 +32,34 @@ export class EditorComponent implements OnInit, OnDestroy {
   listenerUpFn: () => void
   listenerDownFn: () => void
   listenerMoveFn: () => void
+  listenerDblClickFn: () => void
+
+  processCount = 0
+  documentCount = 0
+  flowCount = 0
 
   movedObject: any = {}
 
   exportedJSON: any = []
 
+  processList: Array<any> = []
+  documentList: Array<any> = []
+  flowList: Array<any> = []
+
   constructor(
     private zone: NgZone, 
     private sharedService: SharedService, 
     private elementRef: ElementRef,
-    private renderer: Renderer2
-  ) { }
+    private renderer: Renderer2,
+    private cd: ChangeDetectorRef
+  ) { 
+    this.sharedService.getEvent().subscribe((message: any) => {
+      if (message.eventType === 'mousedown') {
+        let event = message.event
+        this.mouseDown(event)
+      }
+    })
+  }
 
   ngOnInit() {
     // this.canvas = <HTMLCanvasElement> document.getElementById('editor-canvas')
@@ -55,6 +72,10 @@ export class EditorComponent implements OnInit, OnDestroy {
     
     // document.getElementById('dxy').addEventListener('mousedown', this.mouseDown, false);
     
+  }
+
+  ngAfterViewInit() {
+    // this.cd.detectChanges()
   }
 
   mouseUp(e)
@@ -95,6 +116,11 @@ export class EditorComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscription.unsubscribe()
     this.subscription2.unsubscribe()
+
+    this.listenerUpFn()
+    this.listenerDownFn()
+    this.listenerMoveFn()
+    this.listenerDblClickFn()
   }
 
   resizeCanvas() {
@@ -108,10 +134,13 @@ export class EditorComponent implements OnInit, OnDestroy {
   }
 
   stopEdit() {
-    this.sharedService.sendClickEvent('clicked')
+    this.sharedService.sendEvent('clicked')
   }
 
   onDrop(evt) {
+    let isProcess = false
+    let isDocument = false
+    let isFlow = false
     let self = this
     evt.preventDefault()
     let dataStr = evt.dataTransfer.getData('text/plain')
@@ -121,17 +150,29 @@ export class EditorComponent implements OnInit, OnDestroy {
     let data = JSON.parse(dataStr)
     
     let nodeCopy: any = document.getElementById(data.id).cloneNode(true)
+    if (data.process.name === 'Process') {
+      isProcess = true
+      this.processList.push(++this.processCount)
+    } else if (data.process.name === 'Document') {
+      this.documentList.push(++this.documentCount)
+    } else {
+      this.flowList.push(++this.flowCount)
+    }
     nodeCopy.id = this.getUniqueId()
+    // nodeCopy.childNodes[0].contentEditable = 'true'
     data.id = nodeCopy.id
     this.elemId = nodeCopy.id
-    
+
     evt.target.appendChild(nodeCopy)
     this.elementsList.push(nodeCopy)
     this.elementsDataList.push(JSON.parse(JSON.stringify(data)))
     setTimeout(() => {
       let el = this.elementRef.nativeElement.querySelector('#' + this.elemId)
+      let label = this.elementRef.nativeElement.querySelector('#' + this.elemId  + '> p')
+      label.contentEditable = 'true'
       this.listenerDownFn = this.renderer.listen(el, 'mousedown', this.mouseDown.bind(this))
       this.listenerUpFn = this.renderer.listen(this.elementRef.nativeElement, 'mouseup', this.mouseUp.bind(this))
+      this.listenerDblClickFn = this.renderer.listen(el, 'dblclick', this.mouseDblClick.bind(this))
     }, 100)
   }
 
@@ -140,7 +181,7 @@ export class EditorComponent implements OnInit, OnDestroy {
   }
 
   exportJSON() {
-    if (this.elementsList.length === 0) {
+    if (this.elementsDataList.length === 0) {
       return
     }
 
@@ -155,5 +196,14 @@ export class EditorComponent implements OnInit, OnDestroy {
     let url = window.URL.createObjectURL(blob)
     saveAs(blob, 'exportJSON.json')
     window.open(url)
+  }
+
+  mouseDblClick(e) {
+    console.log('double click detected');
+    let el = this.elementRef.nativeElement.querySelector('#' + this.elemId)
+    if (el) {
+      el.contentEditable = true
+    }
+    
   }
 }
