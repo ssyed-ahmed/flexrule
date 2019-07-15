@@ -4,7 +4,7 @@
 .label {
     color: white;
     position: absolute;
-    padding-left: 25px;
+    padding-left: 36px;
     padding-top: 44px;
     font-size: 15px;
 }
@@ -12,8 +12,12 @@
 .input-text {
     color: black;
     position: absolute;
-    padding-left: 45px;
-    padding-top: 57px;
+    padding-left: 12px;
+    padding-top: 37px;
     font-size: 15px;
     width: 70px;
+}
+
+input {
+    width: 100px;
 }

@@ -5,16 +5,20 @@
 .label {
     color: white;
     position: absolute;
-    padding-left: 45px;
-    padding-top: 30px;
+    padding-left: 17px;
+    padding-top: 22px;
     font-size: 15px;
 }
 
 .input-text {
     color: black;
     position: absolute;
-    padding-left: 45px;
-    padding-top: 30px;
+    padding-left: 14px;
+    padding-top: 17px;
     font-size: 15px;
     width: 70px;
+}
+
+input {
+    width: 100px;
 }

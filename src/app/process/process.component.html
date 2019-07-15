@@ -4,8 +4,8 @@
             <input type="text" [(ngModel)]="process.name" (keydown.enter)="onKeyDown($event)">
         </div>
         <p class="label" *ngIf="!isEditable">{{process.name}}</p>
-    <svg width="150" height="80">
-        <rect width="150" height="80" style="fill:rgb(0,0,255);stroke-width:3;stroke:rgb(0,0,0)" />
+    <svg width="120" height="80">
+        <rect width="150" height="80" style="fill:rgb(0,0,255);stroke-width:2;stroke:rgb(0,0,0)" />
         <!-- <text x="60" y="55" font-family="Verdana" font-size="20" fill="white">Process</text> -->
     </svg>
 </div>
