@@ -181,6 +181,7 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   exportJSON() {
+    this.exportedJSON = []
     if (this.elementsDataList.length === 0) {
       return
     }
