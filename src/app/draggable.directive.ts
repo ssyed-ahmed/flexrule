@@ -1,4 +1,4 @@
-import { Directive, EventEmitter, HostListener, ElementRef } from '@angular/core';
+import { Directive, EventEmitter, HostListener, ElementRef, Output } from '@angular/core';
 import {Observable} from 'rxjs'
 
 import 'rxjs/add/operator/map';
@@ -9,6 +9,8 @@ import 'rxjs/add/operator/takeUntil'
   selector: '[appDraggable]'
 })
 export class DraggableDirective {
+
+  @Output() private updatedMoveData: EventEmitter<any> = new EventEmitter()
 
   mouseup = new EventEmitter<MouseEvent>();
   mousedown = new EventEmitter<MouseEvent>();
@@ -35,11 +37,18 @@ export class DraggableDirective {
     }
     console.log(shape);
     
-    let instanceName = event.target.innerHTML
+    let instanceName = (<HTMLInputElement>event.target).innerHTML
     console.log(instanceName);
     console.log('Y position = ' + event.clientY);
     console.log('X position = ' + event.clientX);
     
+    let obj = {
+      shape: shape,
+      name: instanceName,
+      positionX: event.clientX,
+      positionY: event.clientY
+    }
+    this.updatedMoveData.emit(obj);
       return {
           top: event.clientY - this.element.nativeElement.getBoundingClientRect().top,
           left: event.clientX - this.element.nativeElement.getBoundingClientRect().left,

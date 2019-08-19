@@ -25,4 +25,11 @@ export class ProcessMovableRenameableComponent implements OnInit {
   ngOnInit() {
   }
 
+  onMoveUpdate(e) {
+    console.log('received updated move object');
+    
+    console.log(e);
+    
+  }
+
 }
