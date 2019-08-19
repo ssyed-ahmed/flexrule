@@ -1,24 +1,11 @@
-.process {
+.document {
     margin-bottom: 30px;
-}
-
-.movable {
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    background-color: red;
-}
-
-p {
-    vertical-align: middle;
-    text-align: center;
-    line-height: 100px;
 }
 
 .label {
     color: white;
     position: absolute;
-    text-align: center;
+    padding-left: 17px;
     line-height: 70px;
     font-size: 15px;
 }

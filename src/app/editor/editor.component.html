@@ -23,6 +23,9 @@
                 <div *ngIf="processList.length > 0">
                     <app-process-movable-renameable *ngFor="let p of processList"></app-process-movable-renameable>
                 </div>
+                <div *ngIf="documentList.length > 0">
+                    <app-document-movable-renameable *ngFor="let p of documentList"></app-document-movable-renameable>
+                </div>
             </div>
         </div>
     </div>
