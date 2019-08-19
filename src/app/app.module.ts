@@ -11,6 +11,7 @@ import { FlowComponent } from './flow/flow.component';
 import { ProcessMovableRenameableComponent } from './process-movable-renameable/process-movable-renameable.component';
 import { DraggableDirective } from './draggable.directive';
 import { DocumentMovableRenameableComponent } from './document-movable-renameable/document-movable-renameable.component';
+import { FlowMovableRenameableComponent } from './flow-movable-renameable/flow-movable-renameable.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { DocumentMovableRenameableComponent } from './document-movable-renameabl
     FlowComponent,
     ProcessMovableRenameableComponent,
     DraggableDirective,
-    DocumentMovableRenameableComponent
+    DocumentMovableRenameableComponent,
+    FlowMovableRenameableComponent
   ],
   imports: [
     BrowserModule,

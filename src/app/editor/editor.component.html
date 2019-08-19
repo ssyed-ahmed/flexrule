@@ -26,6 +26,9 @@
                 <div *ngIf="documentList.length > 0">
                     <app-document-movable-renameable *ngFor="let p of documentList"></app-document-movable-renameable>
                 </div>
+                <div *ngIf="flowList.length > 0">
+                    <app-flow-movable-renameable *ngFor="let p of flowList"></app-flow-movable-renameable>
+                </div>
             </div>
         </div>
     </div>
