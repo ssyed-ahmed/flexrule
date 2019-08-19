@@ -1,8 +1,9 @@
 <div class="flow" id="flow" draggable="{{draggable}}" (dragstart)="dragStart($event)" (dblclick)="startEdit()">
-    <div *ngIf="isEditable" class="input-text">
-        <input type="text" [(ngModel)]="process.name">
-    </div>
-    <p class="label" *ngIf="!isEditable">{{process.name}}</p>
+    <!-- <div *ngIf="isEditable" class="input-text">
+        <input type="text" [(ngModel)]="process.name" (keydown.enter)="onKeyDown($event)">
+    </div> -->
+    <!-- <p class="label" *ngIf="!isEditable">{{process.name}}</p> -->
+    <p class="label">{{process.name}}</p>
     <svg height="100" width="150">            
         <path stroke="rgb(0,0,0)" fill="rgb(0,0,255)" stroke-width="2" d="M0 20 H70 V0 L120 50 L70 100 V80 H0 Z" />
     </svg>
