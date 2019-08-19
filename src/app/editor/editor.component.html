@@ -21,13 +21,13 @@
                 <!-- <canvas id="editor-canvas" width="100%" height="100%">
                 </canvas> -->
                 <div *ngIf="processList.length > 0">
-                    <app-process-movable-renameable *ngFor="let p of processList"></app-process-movable-renameable>
+                    <app-process-movable-renameable *ngFor="let p of processList" (processPositionUpdated)="onProcessPositionUpdate($event)"></app-process-movable-renameable>
                 </div>
                 <div *ngIf="documentList.length > 0">
-                    <app-document-movable-renameable *ngFor="let p of documentList"></app-document-movable-renameable>
+                    <app-document-movable-renameable *ngFor="let p of documentList" (documentPositionUpdated)="onDocumentPositionUpdate($event)"></app-document-movable-renameable>
                 </div>
                 <div *ngIf="flowList.length > 0">
-                    <app-flow-movable-renameable *ngFor="let p of flowList"></app-flow-movable-renameable>
+                    <app-flow-movable-renameable *ngFor="let p of flowList" (flowPositionUpdated)="onFlowPositionUpdate($event)"></app-flow-movable-renameable>
                 </div>
             </div>
         </div>

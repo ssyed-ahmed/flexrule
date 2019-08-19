@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-process-movable-renameable',
@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class ProcessMovableRenameableComponent implements OnInit {
 
   constructor() { }
+
+  @Output() processPositionUpdated: EventEmitter<any> = new EventEmitter()
 
   isEditable: boolean = false
 
@@ -26,9 +28,9 @@ export class ProcessMovableRenameableComponent implements OnInit {
   }
 
   onMoveUpdate(e) {
-    console.log('received updated move object');
-    
-    console.log(e);
+    if (e.shape === 'rectangle') {
+      this.processPositionUpdated.emit(e)
+    }
     
   }
 

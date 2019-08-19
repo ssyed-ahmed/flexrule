@@ -184,7 +184,22 @@ export class EditorComponent implements OnInit, OnDestroy {
     let el = this.elementRef.nativeElement.querySelector('#' + this.elemId)
     if (el) {
       el.contentEditable = true
-    }
+    }    
+  }
+
+  onProcessPositionUpdate(e) {
+    console.log('In editor process position updated');
+    console.log(e);
     
+  }
+
+  onDocumentPositionUpdate(e) {
+    console.log('In editor document position updated');
+    console.log(e);
+  }
+
+  onFlowPositionUpdate(e) {
+    console.log('In editor flow position updated');
+    console.log(e);
   }
 }

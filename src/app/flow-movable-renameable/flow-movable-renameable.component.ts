@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-flow-movable-renameable',
@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class FlowMovableRenameableComponent implements OnInit {
 
   constructor() { }
+
+  @Output() flowPositionUpdated: EventEmitter<any> = new EventEmitter()
 
   isEditable: boolean = false
 
@@ -23,5 +25,11 @@ export class FlowMovableRenameableComponent implements OnInit {
 
   setEditable() {
     this.isEditable = !this.isEditable
+  }
+
+  onMoveUpdate(e) {
+    if (e.shape === 'flow') {
+      this.flowPositionUpdated.emit(e)
+    }    
   }
 }
