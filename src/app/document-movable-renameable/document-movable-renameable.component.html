@@ -1,4 +1,4 @@
-<div class="document" appDraggable (dblclick)="setEditable()">
+<div class="document" appDraggable (dblclick)="setEditable()" data-shape="document">
     <div *ngIf="isEditable" class="input-text">
         <input [(ngModel)]="process.name">
     </div>

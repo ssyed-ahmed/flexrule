@@ -144,8 +144,6 @@ export class EditorComponent implements OnInit, OnDestroy {
       return
     }
     let data = JSON.parse(dataStr)
-    
-    // let nodeCopy: any = document.getElementById(data.id).cloneNode(true)
     if (data.process.shape === 'rectangle') {
       isProcess = true
       this.processList.push(++this.processCount)
@@ -154,22 +152,8 @@ export class EditorComponent implements OnInit, OnDestroy {
     } else {
       this.flowList.push(++this.flowCount)
     }
-    // nodeCopy.id = this.getUniqueId()
-    // // nodeCopy.childNodes[0].contentEditable = 'true'
-    // data.id = nodeCopy.id
-    // this.elemId = nodeCopy.id
-
-    // evt.target.appendChild(nodeCopy)
-    // this.elementsList.push(nodeCopy)
+    
     this.elementsDataList.push(JSON.parse(JSON.stringify(data)))
-    // setTimeout(() => {
-    //   let el = this.elementRef.nativeElement.querySelector('#' + this.elemId)
-    //   let label = this.elementRef.nativeElement.querySelector('#' + this.elemId  + '> p')
-    //   label.contentEditable = 'true'
-    //   this.listenerDownFn = this.renderer.listen(el, 'mousedown', this.mouseDown.bind(this))
-    //   this.listenerUpFn = this.renderer.listen(this.elementRef.nativeElement, 'mouseup', this.mouseUp.bind(this))
-    //   this.listenerDblClickFn = this.renderer.listen(el, 'dblclick', this.mouseDblClick.bind(this))
-    // }, 100)
   }
 
   getUniqueId() {
@@ -180,12 +164,12 @@ export class EditorComponent implements OnInit, OnDestroy {
     this.exportedJSON = []
     if (this.elementsDataList.length === 0) {
       return
-    }
+    }    
 
-    this.elementsDataList.forEach(elem => {
-      delete elem.id      
-      this.exportedJSON.push(elem.process)
-    })
+    // this.elementsDataList.forEach(elem => {
+    //   delete elem.id      
+    //   this.exportedJSON.push(elem.process)
+    // })
 
     let data = JSON.stringify(this.exportedJSON)
     console.log(data)    

@@ -1,4 +1,4 @@
-<div class="flow" appDraggable (dblclick)="setEditable()">
+<div class="flow" appDraggable (dblclick)="setEditable()" data-shape="flow">
     <div *ngIf="isEditable" class="input-text">
         <input type="text" [(ngModel)]="process.name" (keydown.enter)="onKeyDown($event)">
     </div>
