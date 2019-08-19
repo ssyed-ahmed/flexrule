@@ -161,7 +161,7 @@ export class EditorComponent implements OnInit, OnDestroy {
   }
 
   exportJSON() {
-    this.exportedJSON = []
+    
     if (this.elementsDataList.length === 0) {
       return
     }    
@@ -190,16 +190,47 @@ export class EditorComponent implements OnInit, OnDestroy {
   onProcessPositionUpdate(e) {
     console.log('In editor process position updated');
     console.log(e);
-    
+    let index = this.arrayContains(e)
+    if (index === -1) {
+      this.exportedJSON.push(e)
+    } else {
+      this.exportedJSON[index] = e
+    }
   }
 
   onDocumentPositionUpdate(e) {
     console.log('In editor document position updated');
     console.log(e);
+    let index = this.arrayContains(e)
+    if (index === -1) {
+      this.exportedJSON.push(e)
+    } else {
+      this.exportedJSON[index] = e
+    }
   }
 
   onFlowPositionUpdate(e) {
     console.log('In editor flow position updated');
     console.log(e);
+    let index = this.arrayContains(e)
+    if (index === -1) {
+      this.exportedJSON.push(e)
+    } else {
+      this.exportedJSON[index] = e
+    }
+  }
+
+  arrayContains(elem) {
+    if (this.exportedJSON.length === 0) {
+      return -1
+    }
+    let index = -1
+    for (let i = 0; i < this.exportedJSON.length; i++) {
+      if (elem.name === this.exportedJSON[i].name) {
+        index = i
+        break
+      }
+    }
+    return index
   }
 }
