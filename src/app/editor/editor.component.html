@@ -14,15 +14,15 @@
             <div class="left-menu-heading">
                 Canvas
                 <div class="export-button">
-                    <button (click)="exportJSON()" [disabled]="elementsList.length === 0">Export JSON</button>
+                    <button (click)="exportJSON()" [disabled]="elementsDataList.length === 0">Export JSON</button>
                 </div>
             </div>
             <div id="editor-container" (dragover)="allowDrop($event)" (drop)="onDrop($event)">
                 <!-- <canvas id="editor-canvas" width="100%" height="100%">
                 </canvas> -->
-                <!-- <div *ngIf="processList.length > 0">
-                    <app-process *ngFor="let p of processList" [draggable]="false" [id]="getUniqueId()"></app-process>
-                </div> -->
+                <div *ngIf="processList.length > 0">
+                    <app-process-movable-renameable *ngFor="let p of processList"></app-process-movable-renameable>
+                </div>
             </div>
         </div>
     </div>

@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 export class ProcessComponent implements OnInit, OnDestroy {
 
   @Input() draggable?: boolean = true
-  @Input() id?: string = this.getUniqueId()
+  @Input() id?: string
 
   process:any = {
     shape: 'rectangle',

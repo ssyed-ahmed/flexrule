@@ -1,0 +1,38 @@
+.process {
+    margin-bottom: 30px;
+}
+
+.movable {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-color: red;
+}
+
+p {
+    vertical-align: middle;
+    text-align: center;
+    line-height: 100px;
+}
+
+.label {
+    color: white;
+    position: absolute;
+    /* padding-left: 17px; */
+    text-align: center;
+    line-height: 70px;
+    font-size: 15px;
+}
+
+.input-text {
+    color: black;
+    position: absolute;
+    padding-left: 14px;
+    padding-top: 17px;
+    font-size: 15px;
+    width: 70px;
+}
+
+input {
+    width: 100px;
+}

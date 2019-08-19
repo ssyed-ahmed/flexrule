@@ -149,31 +149,31 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
     }
     let data = JSON.parse(dataStr)
     
-    let nodeCopy: any = document.getElementById(data.id).cloneNode(true)
-    if (data.process.name === 'Process') {
+    // let nodeCopy: any = document.getElementById(data.id).cloneNode(true)
+    if (data.process.shape === 'rectangle') {
       isProcess = true
       this.processList.push(++this.processCount)
-    } else if (data.process.name === 'Document') {
+    } else if (data.process.shape === 'document') {
       this.documentList.push(++this.documentCount)
     } else {
       this.flowList.push(++this.flowCount)
     }
-    nodeCopy.id = this.getUniqueId()
-    // nodeCopy.childNodes[0].contentEditable = 'true'
-    data.id = nodeCopy.id
-    this.elemId = nodeCopy.id
+    // nodeCopy.id = this.getUniqueId()
+    // // nodeCopy.childNodes[0].contentEditable = 'true'
+    // data.id = nodeCopy.id
+    // this.elemId = nodeCopy.id
 
-    evt.target.appendChild(nodeCopy)
-    this.elementsList.push(nodeCopy)
+    // evt.target.appendChild(nodeCopy)
+    // this.elementsList.push(nodeCopy)
     this.elementsDataList.push(JSON.parse(JSON.stringify(data)))
-    setTimeout(() => {
-      let el = this.elementRef.nativeElement.querySelector('#' + this.elemId)
-      let label = this.elementRef.nativeElement.querySelector('#' + this.elemId  + '> p')
-      label.contentEditable = 'true'
-      this.listenerDownFn = this.renderer.listen(el, 'mousedown', this.mouseDown.bind(this))
-      this.listenerUpFn = this.renderer.listen(this.elementRef.nativeElement, 'mouseup', this.mouseUp.bind(this))
-      this.listenerDblClickFn = this.renderer.listen(el, 'dblclick', this.mouseDblClick.bind(this))
-    }, 100)
+    // setTimeout(() => {
+    //   let el = this.elementRef.nativeElement.querySelector('#' + this.elemId)
+    //   let label = this.elementRef.nativeElement.querySelector('#' + this.elemId  + '> p')
+    //   label.contentEditable = 'true'
+    //   this.listenerDownFn = this.renderer.listen(el, 'mousedown', this.mouseDown.bind(this))
+    //   this.listenerUpFn = this.renderer.listen(this.elementRef.nativeElement, 'mouseup', this.mouseUp.bind(this))
+    //   this.listenerDblClickFn = this.renderer.listen(el, 'dblclick', this.mouseDblClick.bind(this))
+    // }, 100)
   }
 
   getUniqueId() {
@@ -181,6 +181,7 @@ export class EditorComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   exportJSON() {
+    this.exportedJSON = []
     if (this.elementsDataList.length === 0) {
       return
     }

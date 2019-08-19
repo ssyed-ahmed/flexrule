@@ -8,6 +8,8 @@ import { EditorComponent } from './editor/editor.component';
 import { ProcessComponent } from './process/process.component';
 import { DocumentComponent } from './document/document.component';
 import { FlowComponent } from './flow/flow.component';
+import { ProcessMovableRenameableComponent } from './process-movable-renameable/process-movable-renameable.component';
+import { DraggableDirective } from './draggable.directive';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { FlowComponent } from './flow/flow.component';
     EditorComponent,
     ProcessComponent,
     DocumentComponent,
-    FlowComponent
+    FlowComponent,
+    ProcessMovableRenameableComponent,
+    DraggableDirective
   ],
   imports: [
     BrowserModule,
